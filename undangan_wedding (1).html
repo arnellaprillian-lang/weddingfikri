@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background:#f6f2eb;
+  color:#333;
+  text-align:center;
+}
+#opening {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:url('berdua.jpg') center/cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+  color:white;
+  text-shadow:0 2px 10px rgba(0,0,0,0.8);
+  transition:opacity 0.6s;
+}
+#opening button {
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:#c8a96a;
+  color:white;
+}
+header {
+  background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('berdua.jpg') center/cover;
+  color:white;
+  padding:120px 20px;
+}
+.section { padding:50px 20px; }
+.card {
+  background:white;
+  max-width:500px;
+  margin:20px auto;
+  padding:25px;
+  border-radius:15px;
+}
+.photo {
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+}
+.btn {
+  display:inline-block;
+  margin-top:15px;
+  padding:10px 20px;
+  border-radius:25px;
+  background:#8b5e3c;
+  color:white;
+  text-decoration:none;
+}
+.fade { opacity:0; transform:translateY(20px); transition:1s; }
+.show { opacity:1; transform:translateY(0); }
+</style>
+</head>
+
+<body>
+
+<div id="opening">
+  <h2>Kepada Yth:</h2>
+  <h3 id="guest">Tamu Undangan</h3>
+  <p id="address"></p>
+  <button id="openBtn">Buka Undangan</button>
+</div>
+
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
+</audio>
+
+<header class="fade">
+  <h1>Fikri Anugrah Ramadhan</h1>
+  <p>&</p>
+  <h1>Sherliyana</h1>
+  <p>05 April 2026</p>
+</header>
+
+<div class="section fade">
+  <div class="card">
+    <h2>Pengantin</h2>
+    <img src="cowo.jpg" class="photo"><br>
+    <h3>Fikri Anugrah Ramadhan</h3>
+    <p>Buahbatu, Bandung</p>
+    <p>&</p>
+    <img src="cewe.jpg" class="photo"><br>
+    <h3>Sherliyana</h3>
+    <p>Cikalong Wetan</p>
+  </div>
+</div>
+
+<div class="section fade">
+  <div class="card">
+    <h2>Akad Nikah</h2>
+    <p>05 April 2026</p>
+    <p>Cikalong Wetan</p>
+
+    <iframe 
+      src="https://maps.google.com/maps?q=Cikalong%20Wetan&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      width="100%" height="250" style="border-radius:15px;border:none;">
+    </iframe>
+
+    <a class="btn" href="https://maps.app.goo.gl/ouS6djR2hvBFyY5R6" target="_blank">
+      📍 Buka Google Maps
+    </a>
+  </div>
+</div>
+
+<div class="section fade">
+  <div class="card">
+    <h2>RSVP</h2>
+    <a class="btn" href="https://wa.me/6282249786900">WhatsApp</a>
+  </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+document.getElementById("guest").innerText = params.get('to') || "Tamu Undangan";
+document.getElementById("address").innerText = params.get('addr') || "";
+
+let opened=false;
+document.getElementById("openBtn").onclick=function(){
+ if(opened) return;
+ opened=true;
+ const opening=document.getElementById("opening");
+ opening.style.opacity="0";
+ setTimeout(()=>opening.style.display="none",600);
+ document.getElementById("music").play().catch(()=>{});
+};
+
+const faders=document.querySelectorAll(".fade");
+window.addEventListener("scroll",()=>{
+ faders.forEach(el=>{
+  if(el.getBoundingClientRect().top<window.innerHeight-50){
+    el.classList.add("show");
+  }
+ });
+});
+</script>
+
+</body>
+</html>
