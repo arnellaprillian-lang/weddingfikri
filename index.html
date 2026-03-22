@@ -3,291 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Undangan Pernikahan</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
+<title>Wedding Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
 
 <style>
-html { scroll-behavior: smooth; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at 20% 30%, rgba(200,169,106,0.08), transparent 40%),
-              radial-gradient(circle at 80% 70%, rgba(200,169,106,0.05), transparent 40%),
-              #1e1a17;
-  color: #f5e6c8;
-  text-align: center;
-  overflow-x: hidden;
+    background: #0c0c0c;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
 }
 
-/* OPENING */
-#opening {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,0,0,0.7);
-  z-index: 9999;
+/* GOLD STYLE */
+.gold {
+    color: #d4af37;
 }
 
-.envelope {
-  width: 280px;
-  height: 180px;
-  position: relative;
-  perspective: 800px;
-}
-
+/* COVER */
 .cover {
-  position: absolute;
-  inset: 0;
-  background: #c8a96a;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 40px;
-  transform-origin: top;
-  transition: 0.6s;
-  z-index: 2;
+    height: 100vh;
+    background: linear-gradient(180deg,#000,#1a1a1a);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 2s ease;
 }
 
-.letter {
-  position: absolute;
-  inset: 0;
-  background: #fffaf3;
-  color: #333;
-  border-radius: 10px;
-  padding: 15px;
-  transform: translateY(100%);
-  transition: 0.6s;
+.cover h1 {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 4px;
+    color: #d4af37;
 }
 
-.envelope.open .cover {
-  transform: rotateX(120deg);
+.cover a {
+    margin-top: 30px;
+    padding: 12px 30px;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-.envelope.open .letter {
-  transform: translateY(0);
+.cover a:hover {
+    background: #d4af37;
+    color: black;
 }
 
-header {
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-              url('berdua.jpg') center/cover fixed;
-  padding: 120px 20px;
+/* SECTION */
+section {
+    padding: 80px 20px;
+    text-align: center;
+    animation: fadeUp 1.5s ease;
+}
+
+/* HERO */
+.hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #d4af37;
+}
+
+/* MEMPELAI */
+.mempelai {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
 }
 
 .card {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
-  margin: 20px auto;
-  max-width: 500px;
-  padding: 25px;
-  border-radius: 20px;
-  border: 1px solid rgba(200,169,106,0.3);
+    background: #111;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid #222;
+    width: 200px;
+    transition: 0.3s;
 }
 
-.photo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 2px solid #c8a96a;
-  object-fit: cover;
+.card:hover {
+    transform: translateY(-10px);
+    border-color: #d4af37;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 25px;
-  border-radius: 30px;
-  background: linear-gradient(45deg,#c8a96a,#e6d3a3);
-  color: #1e1a17;
-  text-decoration: none;
+.card img {
+    width: 100%;
+    border-radius: 50%;
+    border: 3px solid #d4af37;
 }
 
+/* ACARA */
+.acara {
+    background: #111;
+}
+
+.box {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #d4af37;
+    width: 250px;
+}
+
+/* GALERI */
 .gallery {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .gallery img {
-  width: 80%;
-  border-radius: 15px;
-  scroll-snap-align: center;
+    width: 150px;
+    margin: 10px;
+    border-radius: 10px;
+    transition: 0.3s;
 }
 
-.flower {
-  position: fixed;
-  top: -50px;
-  pointer-events: none;
-  opacity: 0.8;
-  animation: fall linear forwards;
+.gallery img:hover {
+    transform: scale(1.1);
 }
 
-@keyframes fall {
-  to {
-    transform: translateY(110vh) translateX(50px) rotate(360deg);
-  }
+/* RSVP */
+.rsvp input, .rsvp textarea {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: white;
 }
 
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 1s;
+.rsvp button {
+    padding: 10px 25px;
+    border: none;
+    background: #d4af37;
+    color: black;
 }
 
-.show {
-  opacity: 1;
-  transform: translateY(0);
+/* FOOTER */
+.footer {
+    padding: 40px;
+    font-size: 14px;
+    color: #aaa;
 }
 
-footer {
-  background: #1a1613;
-  padding: 20px;
+/* ANIMATION */
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+@keyframes fadeUp {
+    from {
+        opacity:0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity:1;
+        transform: translateY(0);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- OPENING -->
-<div id="opening">
-  <div class="envelope" id="envelope">
-    <div class="cover">💌</div>
-    <div class="letter">
-      <h3>Kepada Yth:</h3>
-      <h2 id="guest">Tamu</h2>
-      <p id="address"></p>
-      <button id="openBtn">Buka Undangan</button>
+<!-- COVER -->
+<section class="cover">
+    <h1>WEDDING INVITATION</h1>
+    <p class="gold">Fikri & Pasangan</p>
+    <a href="#home">Buka Undangan</a>
+</section>
+
+<!-- HERO -->
+<section id="home" class="hero">
+    <h2>Fikri & Pasangan</h2>
+    <p>12 Desember 2026</p>
+</section>
+
+<!-- MEMPELAI -->
+<section class="mempelai">
+    <div class="card">
+        <img src="https://via.placeholder.com/200">
+        <h3 class="gold">Fikri</h3>
+        <p>Putra dari Bpk...</p>
     </div>
-  </div>
+
+    <div class="card">
+        <img src="https://via.placeholder.com/200">
+        <h3 class="gold">Pasangan</h3>
+        <p>Putri dari Ibu...</p>
+    </div>
+</section>
+
+<!-- ACARA -->
+<section class="acara">
+    <h2 class="gold">Save The Date</h2>
+
+    <div class="box">
+        <h3>Akad</h3>
+        <p>10.00 WIB</p>
+        <p>Bandung</p>
+    </div>
+
+    <div class="box">
+        <h3>Resepsi</h3>
+        <p>13.00 WIB</p>
+    </div>
+</section>
+
+<!-- GALERI -->
+<section>
+    <h2 class="gold">Gallery</h2>
+    <div class="gallery">
+        <img src="https://via.placeholder.com/150">
+        <img src="https://via.placeholder.com/150">
+        <img src="https://via.placeholder.com/150">
+    </div>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp">
+    <h2 class="gold">Ucapan & Doa</h2>
+    <input type="text" placeholder="Nama">
+    <textarea placeholder="Tulis ucapan..."></textarea>
+    <br>
+    <button>Kirim</button>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 Wedding Invitation
 </div>
-
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2023/03/14/audio_6f4f9c6d4b.mp3">
-</audio>
-
-<header class="fade">
-  <h1>Fikri & Sherliyana</h1>
-  <p>05 April 2026</p>
-</header>
-
-<div class="card fade">
-  <img src="cowo.jpg" class="photo" loading="lazy">
-  <h3>Fikri Anugrah Ramadhan</h3>
-  <p>Putra dari Bapak Heri Nugraha</p>
-
-  <p>&</p>
-
-  <img src="cewe.jpg" class="photo" loading="lazy">
-  <h3>Sherliyana</h3>
-  <p>Putri dari Bapak Enjang Supriadi</p>
-</div>
-
-<div class="card fade">
-  <h2>Galeri</h2>
-  <div class="gallery">
-    <img src="berdua.jpg" loading="lazy">
-    <img src="cowo.jpg" loading="lazy">
-    <img src="cewe.jpg" loading="lazy">
-  </div>
-</div>
-
-<div class="card fade">
-  <iframe src="https://maps.google.com/maps?q=Cikalong%20Wetan&output=embed"
-  width="100%" height="250" style="border-radius:15px;border:none;"></iframe>
-
-  <a class="btn" onclick="navigate()">🧭 Arahkan Saya</a>
-</div>
-
-<div class="card fade">
-  <a class="btn" href="https://wa.me/6282249786900?text=Saya%20akan%20hadir">Konfirmasi Hadir</a>
-</div>
-
-<footer>
-  <p>Hatur nuhun 🙏</p>
-</footer>
-
-<script>
-const p = new URLSearchParams(location.search);
-document.getElementById("guest").innerText = p.get('to') || "Bapak/Ibu/Saudara/i";
-document.getElementById("address").innerText = p.get('addr') || "Di Tempat";
-
-const envelope = document.getElementById("envelope");
-const openBtn = document.getElementById("openBtn");
-const opening = document.getElementById("opening");
-const music = document.getElementById("music");
-
-openBtn.onclick = () => {
-  envelope.classList.add("open");
-
-  setTimeout(() => {
-    opening.style.opacity = "0";
-    opening.style.pointerEvents = "none";
-    setTimeout(() => opening.remove(), 600);
-  }, 800);
-
-  music.volume = 0;
-  music.play().catch(() => {});
-
-  let v = 0;
-  const fade = setInterval(() => {
-    v += 0.05;
-    if (v >= 0.5) {
-      music.volume = 0.5;
-      clearInterval(fade);
-    } else {
-      music.volume = v;
-    }
-  }, 200);
-};
-
-// fallback autoplay
-window.addEventListener("click", () => {
-  music.play().catch(() => {});
-}, { once: true });
-
-// scroll animation
-const fades = document.querySelectorAll('.fade');
-window.addEventListener("scroll", () => {
-  fades.forEach(el => {
-    if (el.getBoundingClientRect().top < innerHeight - 50) {
-      el.classList.add('show');
-    }
-  });
-});
-
-// flower effect
-setInterval(() => {
-  const fl = document.createElement("div");
-  fl.className = "flower";
-  fl.innerText = ["❀","✿","❁"][Math.floor(Math.random()*3)];
-  fl.style.left = Math.random()*100 + "vw";
-  fl.style.fontSize = (12 + Math.random()*20) + "px";
-  fl.style.animationDuration = (4 + Math.random()*6) + "s";
-  document.body.appendChild(fl);
-  setTimeout(() => fl.remove(), 10000);
-}, 300);
-
-// navigation
-function navigate() {
-  const target = "-6.858,107.471"; // ganti sesuai lokasi
-
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      window.open(`https://www.google.com/maps/dir/${pos.coords.latitude},${pos.coords.longitude}/${target}`);
-    }, () => {
-      window.open("https://maps.app.goo.gl/ouS6djR2hvBFyY5R6");
-    });
-  } else {
-    window.open("https://maps.app.goo.gl/ouS6djR2hvBFyY5R6");
-  }
-}
-</script>
 
 </body>
 </html>
