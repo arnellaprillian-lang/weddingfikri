@@ -1,96 +1,192 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan Pernikahan</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #fffaf5;
-      color: #333;
-      text-align: center;
-    }
-    header {
-      background: linear-gradient(to right, #d4af37, #f7e7b4);
-      padding: 50px 20px;
-      color: white;
-    }
-    h1 {
-      font-size: 40px;
-      margin: 10px 0;
-    }
-    .section {
-      padding: 40px 20px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 500px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #d4af37;
-      color: white;
-      border-radius: 25px;
-      text-decoration: none;
-      margin-top: 10px;
-    }
-    footer {
-      padding: 20px;
-      font-size: 14px;
-      background: #eee;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background:#f6f2eb;
+  color:#333;
+  text-align:center;
+}
+
+/* OPENING */
+#opening {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#2f2f2f;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+}
+
+#opening button {
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:#c8a96a;
+  color:white;
+  font-size:16px;
+}
+
+/* HEADER */
+header {
+  background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+  url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc');
+  background-size:cover;
+  color:white;
+  padding:120px 20px;
+}
+
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:42px;
+}
+
+/* SECTION */
+.section {
+  padding:50px 20px;
+}
+
+.card {
+  background:white;
+  max-width:500px;
+  margin:20px auto;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* BUTTON */
+.btn {
+  display:inline-block;
+  margin-top:15px;
+  padding:10px 20px;
+  border-radius:25px;
+  background:#8b5e3c;
+  color:white;
+  text-decoration:none;
+}
+
+/* COUNTDOWN */
+#countdown {
+  font-size:20px;
+  margin-top:10px;
+}
+
+/* FADE ANIMATION */
+.fade {
+  opacity:0;
+  transform:translateY(20px);
+  transition:1s;
+}
+
+.show {
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
 </head>
+
 <body>
 
-<header>
-  <h2>Undangan Pernikahan</h2>
+<!-- OPENING -->
+<div id="opening">
+  <h2>Kepada Yth:</h2>
+  <h3 id="guest">Tamu Undangan</h3>
+  <button onclick="openInvite()">Buka Undangan</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
+</audio>
+
+<header class="fade">
   <h1>Arnell & Pasangan</h1>
   <p>22 Desember 2026</p>
+  <div id="countdown"></div>
 </header>
 
-<div class="section">
+<div class="section fade">
   <div class="card">
-    <h2>Assalamu’alaikum</h2>
-    <p>Dengan penuh kebahagiaan kami mengundang Anda untuk hadir di acara pernikahan kami.</p>
+    <h2>Wilujeng Sumping</h2>
+    <p>Kalayan rasa kabagjaan, kami ngahaturkeun uleman...</p>
   </div>
 </div>
 
-<div class="section">
+<div class="section fade">
   <div class="card">
     <h2>Detail Acara</h2>
-    <p><b>Akad:</b> 08.00 WIB</p>
-    <p><b>Resepsi:</b> 10.00 WIB</p>
-    <p><b>Lokasi:</b> Bandar Lampung</p>
-    <a class="btn" href="https://maps.google.com" target="_blank">Lihat Lokasi</a>
+    <p>Akad: 08.00 WIB</p>
+    <p>Resepsi: 10.00 WIB</p>
+    <a class="btn" href="https://maps.google.com">Lokasi</a>
   </div>
 </div>
 
-<div class="section">
-  <div class="card">
-    <h2>Gallery</h2>
-    <img src="https://via.placeholder.com/300" style="width:100%; border-radius:10px;">
-  </div>
-</div>
-
-<div class="section">
+<div class="section fade">
   <div class="card">
     <h2>RSVP</h2>
-    <p>Konfirmasi kehadiran:</p>
-    <a class="btn" href="https://wa.me/628xxxxxxxxxx">Kirim WhatsApp</a>
+    <a class="btn" href="https://wa.me/628xxxxxxxxxx">WhatsApp</a>
   </div>
 </div>
 
-<footer>
-  <p>Terima kasih atas doa dan kehadirannya ❤️</p>
+<footer class="section">
+  <p>Hatur nuhun 🙏</p>
 </footer>
+
+<script>
+// NAMA TAMU
+const urlParams = new URLSearchParams(window.location.search);
+const nama = urlParams.get('to');
+if(nama){
+  document.getElementById("guest").innerText = nama;
+}
+
+// OPEN INVITE
+function openInvite(){
+  document.getElementById("opening").style.display="none";
+  document.getElementById("music").play();
+}
+
+// COUNTDOWN
+const targetDate = new Date("Dec 22, 2026 08:00:00").getTime();
+
+setInterval(()=>{
+  const now = new Date().getTime();
+  const gap = targetDate - now;
+
+  const d = Math.floor(gap / (1000*60*60*24));
+  const h = Math.floor((gap % (1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((gap % (1000*60*60))/(1000*60));
+  const s = Math.floor((gap % (1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML =
+    d+" Hari "+h+" Jam "+m+" Menit "+s+" Detik";
+},1000);
+
+// SCROLL ANIMATION
+const fades = document.querySelectorAll('.fade');
+window.addEventListener('scroll', ()=>{
+  fades.forEach(el=>{
+    const top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 50){
+      el.classList.add('show');
+    }
+  });
+});
+</script>
 
 </body>
 </html>
