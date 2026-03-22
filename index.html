@@ -8,67 +8,88 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
 
 <style>
+html { scroll-behavior:smooth; }
+
 body {
   margin:0;
   font-family:'Poppins', sans-serif;
-  background:#1e1a17;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(200,169,106,0.08), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(200,169,106,0.05), transparent 40%),
+    #1e1a17;
   color:#f5e6c8;
   text-align:center;
+  overflow-x:hidden;
 }
 
-/* OPENING */
+/* ===== AMplop ===== */
 #opening {
   position:fixed;
   width:100%;
   height:100%;
-  background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
-  url('berdua.jpg') center/cover;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   z-index:9999;
+  background:rgba(0,0,0,0.7);
+}
+
+.envelope {
+  width:280px;
+  height:180px;
+  position:relative;
+}
+
+.cover {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#c8a96a;
+  border-radius:10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:40px;
   transition:0.6s;
+  z-index:2;
+}
+
+.letter {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#fffaf3;
+  color:#333;
+  border-radius:10px;
+  padding:15px;
+  transform:translateY(100%);
+  transition:0.6s;
+}
+
+.envelope.open .cover {
+  transform:translateY(-100%);
+}
+
+.envelope.open .letter {
+  transform:translateY(0);
 }
 
 /* HEADER */
 header {
-  background:linear-gradient(rgba(30,26,23,0.7),rgba(30,26,23,0.7)),
-  url('berdua.jpg') center/cover;
+  background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+  url('berdua.jpg') center/cover fixed;
   padding:120px 20px;
-}
-
-h1 {
-  font-family:'Playfair Display', serif;
-  font-size:36px;
-}
-
-/* SECTION */
-.section {
-  padding:50px 20px;
 }
 
 /* CARD */
 .card {
-  background:rgba(255,255,255,0.03);
-  backdrop-filter:blur(10px);
-  max-width:500px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(12px);
   margin:20px auto;
+  max-width:500px;
   padding:25px;
   border-radius:20px;
   border:1px solid rgba(200,169,106,0.3);
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
-  position:relative;
-}
-
-.card::before {
-  content:"";
-  position:absolute;
-  top:0;
-  left:20%;
-  width:60%;
-  height:2px;
-  background:#c8a96a;
 }
 
 /* FOTO */
@@ -76,9 +97,8 @@ h1 {
   width:120px;
   height:120px;
   border-radius:50%;
-  object-fit:cover;
-  margin:10px;
   border:2px solid #c8a96a;
+  object-fit:cover;
 }
 
 /* BUTTON */
@@ -90,14 +110,42 @@ h1 {
   background:linear-gradient(45deg,#c8a96a,#e6d3a3);
   color:#1e1a17;
   text-decoration:none;
-  font-weight:bold;
+}
+
+/* GALLERY */
+.gallery {
+  display:flex;
+  overflow-x:auto;
+  gap:10px;
+  scroll-snap-type:x mandatory;
+}
+
+.gallery img {
+  width:80%;
+  border-radius:15px;
+  scroll-snap-align:center;
+}
+
+/* FLOWER */
+.flower {
+  position:fixed;
+  top:-50px;
+  pointer-events:none;
+  opacity:0.8;
+  animation:fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform:translateY(110vh) translateX(50px) rotate(360deg);
+  }
 }
 
 /* ANIMASI */
 .fade {
   opacity:0;
-  transform:translateY(30px);
-  transition:1.2s;
+  transform:translateY(40px);
+  transition:1s;
 }
 
 .show {
@@ -114,124 +162,130 @@ footer {
 
 <body>
 
-<!-- OPENING -->
+<!-- AMplop -->
 <div id="opening">
-  <h2>Kepada Yth:</h2>
-  <h3 id="guest">Tamu Undangan</h3>
-  <p id="address"></p>
-  <button id="openBtn">Buka Undangan</button>
+  <div class="envelope" id="envelope">
+    <div class="cover">💌</div>
+    <div class="letter">
+      <h3>Kepada Yth:</h3>
+      <h2 id="guest">Tamu</h2>
+      <p id="address"></p>
+      <button id="openBtn">Buka Undangan</button>
+    </div>
+  </div>
 </div>
 
-<!-- MUSIC -->
+<!-- AUDIO -->
 <audio id="music" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
+  <source src="https://cdn.pixabay.com/audio/2023/03/14/audio_6f4f9c6d4b.mp3">
 </audio>
 
 <header class="fade">
-  <h1>Fikri Anugrah Ramadhan</h1>
-  <p>&</p>
-  <h1>Sherliyana</h1>
+  <h1>Fikri & Sherliyana</h1>
   <p>05 April 2026</p>
 </header>
 
 <!-- PENGANTIN -->
-<div class="section fade">
-  <div class="card">
-    <p style="color:#c8a96a;">❀ ❀ ❀</p>
+<div class="card fade">
+  <img src="cowo.jpg" class="photo">
+  <h3>Fikri Anugrah Ramadhan</h3>
+  <p>Putra dari Bapak Heri Nugraha</p>
 
-    <img src="cowo.jpg" class="photo">
-    <h3>Fikri Anugrah Ramadhan</h3>
-    <p>Buahbatu, Bandung</p>
+  <p>&</p>
 
-    <p style="font-size:22px;">&</p>
+  <img src="cewe.jpg" class="photo">
+  <h3>Sherliyana</h3>
+  <p>Putri dari Bapak Enjang Supriadi</p>
+</div>
 
-    <img src="cewe.jpg" class="photo">
-    <h3>Sherliyana</h3>
-    <p>Cikalong Wetan</p>
+<!-- GALERI -->
+<div class="card fade">
+  <h2>Galeri</h2>
+  <div class="gallery">
+    <img src="berdua.jpg">
+    <img src="cowo.jpg">
+    <img src="cewe.jpg">
   </div>
 </div>
 
-<!-- ACARA -->
-<div class="section fade">
-  <div class="card">
-    <p style="color:#c8a96a;">❀ ❀ ❀</p>
+<!-- MAP -->
+<div class="card fade">
+  <iframe src="https://maps.google.com/maps?q=Cikalong%20Wetan&output=embed"
+  width="100%" height="250" style="border-radius:15px;border:none;"></iframe>
 
-    <h2>Akad Nikah</h2>
-    <p>05 April 2026</p>
-    <p>Cikalong Wetan</p>
-
-    <iframe 
-      src="https://maps.google.com/maps?q=Cikalong%20Wetan&t=&z=15&ie=UTF8&iwloc=&output=embed"
-      width="100%" height="250"
-      style="border-radius:15px;border:none;">
-    </iframe>
-
-    <a class="btn" href="https://maps.app.goo.gl/ouS6djR2hvBFyY5R6" target="_blank">
-      📍 Buka Google Maps
-    </a>
-  </div>
+  <a class="btn" onclick="navigate()">🧭 Arahkan Saya</a>
 </div>
 
 <!-- RSVP -->
-<div class="section fade">
-  <div class="card">
-    <p style="color:#c8a96a;">❀ ❀ ❀</p>
-
-    <h2>Konfirmasi Kehadiran</h2>
-    <a class="btn" href="https://wa.me/6282249786900">WhatsApp</a>
-  </div>
+<div class="card fade">
+  <a class="btn" href="https://wa.me/6282249786900">WhatsApp</a>
 </div>
 
 <footer>
-  <p>Hatur nuhun atas doa sareng kahadiranana 🙏</p>
+  <p>Hatur nuhun 🙏</p>
 </footer>
 
 <script>
-// PARAM URL
-const params = new URLSearchParams(window.location.search);
-document.getElementById("guest").innerText =
-  params.get('to') ? decodeURIComponent(params.get('to')) : "Tamu Undangan";
-document.getElementById("address").innerText =
-  params.get('addr') ? decodeURIComponent(params.get('addr')) : "";
+// PARAM
+const p=new URLSearchParams(location.search);
+guest.innerText=p.get('to')||"Tamu";
+address.innerText=p.get('addr')||"";
 
-// OPEN FIX
-let opened = false;
-const btn = document.getElementById("openBtn");
-const opening = document.getElementById("opening");
-const music = document.getElementById("music");
+// OPEN
+openBtn.onclick=()=>{
+ envelope.classList.add("open");
 
-btn.addEventListener("click", function(){
-  if(opened) return;
-  opened = true;
+ setTimeout(()=>{
+  opening.style.opacity="0";
+  opening.style.pointerEvents="none";
+  setTimeout(()=>opening.remove(),600);
+ },800);
 
-  btn.disabled = true;
-  btn.innerText = "Membuka...";
+ music.volume=0;
+ music.play().catch(()=>{});
 
-  opening.style.opacity = "0";
-  opening.style.pointerEvents = "none";
+ let v=0;
+ let fade=setInterval(()=>{
+  v+=0.05;
+  if(v>=0.5){music.volume=0.5;clearInterval(fade);}
+  else{music.volume=v;}
+ },200);
+};
 
-  setTimeout(()=>{
-    opening.remove();
-  }, 600);
-
-  if(music){
-    music.play().catch(()=>{});
+// SCROLL
+const f=document.querySelectorAll('.fade');
+window.addEventListener("scroll",()=>{
+ f.forEach(el=>{
+  if(el.getBoundingClientRect().top<innerHeight-50){
+   el.classList.add('show');
   }
+ });
 });
 
-// SCROLL ANIM
-const faders = document.querySelectorAll(".fade");
+// FLOWER
+setInterval(()=>{
+ let fl=document.createElement("div");
+ fl.className="flower";
+ fl.innerText=["❀","✿","❁"][Math.floor(Math.random()*3)];
+ fl.style.left=Math.random()*100+"vw";
+ fl.style.fontSize=(12+Math.random()*20)+"px";
+ fl.style.animationDuration=(4+Math.random()*6)+"s";
+ document.body.appendChild(fl);
+ setTimeout(()=>fl.remove(),10000);
+},300);
 
-function show(){
-  faders.forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight - 50){
-      el.classList.add("show");
-    }
+// NAVIGASI
+function navigate(){
+ if(navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(pos=>{
+   window.open(`https://www.google.com/maps/dir/${pos.coords.latitude},${pos.coords.longitude}/-6.8,107.5`);
+  },()=>{
+   window.open("https://maps.app.goo.gl/ouS6djR2hvBFyY5R6");
   });
+ } else {
+  window.open("https://maps.app.goo.gl/ouS6djR2hvBFyY5R6");
+ }
 }
-
-window.addEventListener("scroll", show);
-window.addEventListener("load", show);
 </script>
 
 </body>
