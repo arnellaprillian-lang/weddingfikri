@@ -3,230 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Undangan Pernikahan</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<title>Undangan Pernikahan Fikri & Sindi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin:0;
-    font-family: 'Montserrat', sans-serif;
-    background:#0b0b0b;
-    color:white;
-    scroll-behavior:smooth;
+    font-family:'Montserrat', sans-serif;
+    background:#2b2118;
+    color:#f5e6c8;
+    overflow:hidden;
+}
+
+/* CONTAINER SWIPE */
+.container {
+    display:flex;
+    width:600%;
+    height:100vh;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+}
+
+.slide {
+    min-width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    scroll-snap-align:start;
+}
+
+/* FRAME SUNDA */
+.frame {
+    width:90%;
+    max-width:400px;
+    padding:30px;
+    border:2px solid #c8a96a;
+    border-radius:25px;
+    background:rgba(0,0,0,0.4);
+    box-shadow:0 0 40px rgba(200,169,106,0.2);
+    text-align:center;
 }
 
 /* GOLD */
-.gold { color:#d4af37; }
-
-/* COVER */
-.cover {
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(#000,#1a1a1a);
+.gold {
+    color:#c8a96a;
+    font-family:'Playfair Display';
 }
-.cover a {
-    margin-top:20px;
-    padding:12px 25px;
-    border:1px solid gold;
-    color:gold;
+
+/* FOTO */
+img {
+    width:100%;
+    border-radius:15px;
+    margin-top:15px;
+}
+
+/* MEMPELAI */
+.mempelai img {
+    width:120px;
+    border-radius:50%;
+    border:2px solid #c8a96a;
+}
+
+/* TEXT */
+p {
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* BUTTON */
+.btn {
+    margin-top:15px;
+    display:inline-block;
+    padding:10px 20px;
+    border:1px solid #c8a96a;
+    color:#c8a96a;
     text-decoration:none;
 }
 
-/* SECTION */
-section { padding:80px 20px; text-align:center; }
-
-/* FOTO */
-img { max-width:100%; }
-
-/* MEMPELAI */
-.mempelai {
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:30px;
-}
-.card {
-    width:260px;
-    background:#111;
-    padding:20px;
-    border-radius:20px;
-}
-.card img {
-    width:140px;
+/* MUSIC */
+.music {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#c8a96a;
+    color:black;
+    padding:12px;
     border-radius:50%;
-    border:3px solid gold;
 }
 
 /* COUNTDOWN */
 .countdown {
     display:flex;
     justify-content:center;
-    gap:20px;
-    font-size:20px;
-}
-
-/* BUTTON */
-button {
-    padding:10px 20px;
-    background:gold;
-    border:none;
-}
-
-/* MUSIC BTN */
-.music-btn {
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:gold;
-    color:black;
-    padding:10px;
-    border-radius:50%;
-    cursor:pointer;
-}
-
-/* ANIMASI */
-.fade {
-    opacity:0;
-    transform:translateY(40px);
-    transition:1s;
-}
-.fade.show {
-    opacity:1;
-    transform:translateY(0);
+    gap:10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- COVER -->
-<section class="cover">
-    <h1 class="gold">WEDDING INVITATION</h1>
-    <h2 id="tamu">Kepada Tamu</h2>
-    <a href="#home" onclick="playMusic()">Buka Undangan</a>
-</section>
+<div class="container">
 
-<!-- HERO -->
-<section id="home" class="fade">
-    <h2 class="gold">Fikri & Sindi</h2>
-    <p>05 April 2026</p>
-    <img src="berdua.jpg" style="width:250px;border-radius:20px;">
-</section>
+<!-- SLIDE 1 -->
+<div class="slide">
+<div class="frame">
+<h2 class="gold">Fikri & Sindi</h2>
+<p id="tamu">Ka Para Tamu Nu Dipihormat</p>
+<img src="berdua.jpg">
+<a href="#" class="btn" onclick="playMusic()">Buka Undangan</a>
+</div>
+</div>
 
-<!-- COUNTDOWN -->
-<section class="fade">
-    <h2 class="gold">Menuju Hari Bahagia</h2>
-    <div class="countdown">
-        <div><span id="hari"></span><br>Hari</div>
-        <div><span id="jam"></span><br>Jam</div>
-        <div><span id="menit"></span><br>Menit</div>
-        <div><span id="detik"></span><br>Detik</div>
-    </div>
-</section>
+<!-- SLIDE 2 UCAPAN -->
+<div class="slide">
+<div class="frame">
+<p>
+Ku rahmat sareng ridho ti Gusti Nu Maha Suci, kalayan rasa syukur anu jero,  
+simkuring ngahaturkeun ieu undangan pernikahan.  
+Mugia ku ieu acara, janten jalan pikeun ngahijikeun dua jiwa dina hiji ikatan suci,  
+ngawangun kulawarga anu pinuh ku kanyaah, kaharmonisan, sareng kabagjaan.  
 
-<!-- MEMPELAI -->
-<section class="mempelai fade">
+Kami ngahaturkeun kalayan hormat, mugia Bapak/Ibu/Saudara/i tiasa ngahadiran  
+sareng masihan doa restu ka panganten.
+</p>
+</div>
+</div>
 
-<div class="card">
+<!-- SLIDE 3 MEMPELAI -->
+<div class="slide">
+<div class="frame mempelai">
+
 <img src="cowo.jpg">
 <h3 class="gold">Fikri Anugrah Ramadhan</h3>
-<p>
-Putra dari Bapak Heri Nugraha<br><br>
-Bandung, 12 Desember 1999<br><br>
-G-Land Ciwastra Park Cendana,<br>
-Bojongsoang
-</p>
-</div>
+<p>Putra ti Bapak Heri Nugraha</p>
 
-<div class="card">
+<br>
+
 <img src="cewe.jpg">
 <h3 class="gold">Sindi Rosmiati</h3>
-<p>
-Putri dari Bapak Enjang Supriadi<br><br>
-Bandung, 04 Agustus 2005<br><br>
-KP Cianca RT 001/008,<br>
-Cikalong Wetan
-</p>
+<p>Putri ti Bapak Enjang Supriadi</p>
+
+</div>
 </div>
 
-</section>
-
-<!-- ACARA -->
-<section class="fade">
-<h2 class="gold">Akad Nikah</h2>
+<!-- SLIDE 4 ACARA -->
+<div class="slide">
+<div class="frame">
+<h3 class="gold">Akad Nikah</h3>
 <p>05 April 2026</p>
-<a href="https://maps.app.goo.gl/6fNTUMAbQiqNRJ566" target="_blank" class="gold">
-Lihat Lokasi
+<p>Bandung</p>
+
+<a href="https://maps.app.goo.gl/6fNTUMAbQiqNRJ566" target="_blank" class="btn">
+Tingali Lokasi
 </a>
-</section>
+</div>
+</div>
 
-<!-- RSVP -->
-<section class="fade">
-<h2 class="gold">Kirim Ucapan</h2>
-<input id="nama" placeholder="Nama"><br><br>
-<textarea id="pesan" placeholder="Ucapan"></textarea><br><br>
-<button onclick="kirimWA()">Kirim via WhatsApp</button>
-</section>
+<!-- SLIDE 5 COUNTDOWN -->
+<div class="slide">
+<div class="frame">
+<h3 class="gold">Ngantosan Dinten Bahagia</h3>
 
-<!-- MUSIC -->
+<div class="countdown">
+<div><span id="h"></span><br>Hari</div>
+<div><span id="j"></span><br>Jam</div>
+<div><span id="m"></span><br>Menit</div>
+<div><span id="d"></span><br>Detik</div>
+</div>
+
+</div>
+</div>
+
+<!-- SLIDE 6 PENUTUP -->
+<div class="slide">
+<div class="frame">
+<p>
+Hatur nuhun kana kahadiran sareng doa restu anu dipasihkeun.  
+Mugia janten amal kahadean sareng berkah pikeun urang sadayana.  
+
+Wassalamu’alaikum Warahmatullahi Wabarakatuh.
+</p>
+</div>
+</div>
+
+</div>
+
 <audio id="musik" src="musik.mp3"></audio>
-<div class="music-btn" onclick="toggleMusic()">🎵</div>
+<div class="music" onclick="toggle()">🎵</div>
 
 <script>
 
 /* NAMA TAMU */
-const url = new URLSearchParams(window.location.search);
-const namaTamu = url.get('to');
-if(namaTamu){
-    document.getElementById("tamu").innerText = "Kepada " + namaTamu;
-}
+let p=new URLSearchParams(window.location.search);
+let t=p.get("to");
+if(t){ document.getElementById("tamu").innerText="Kepada "+t; }
 
 /* MUSIC */
-let musik = document.getElementById("musik");
-function playMusic(){ musik.play(); }
-function toggleMusic(){
-    if(musik.paused){ musik.play(); }
-    else{ musik.pause(); }
-}
+let m=document.getElementById("musik");
+function playMusic(){ m.play(); }
+function toggle(){ m.paused?m.play():m.pause(); }
 
 /* COUNTDOWN */
-let target = new Date("April 5, 2026 00:00:00").getTime();
+let target=new Date("April 5, 2026").getTime();
 setInterval(()=>{
-    let now = new Date().getTime();
-    let selisih = target - now;
-
-    document.getElementById("hari").innerText = Math.floor(selisih/(1000*60*60*24));
-    document.getElementById("jam").innerText = Math.floor((selisih%(1000*60*60*24))/(1000*60*60));
-    document.getElementById("menit").innerText = Math.floor((selisih%(1000*60*60))/(1000*60));
-    document.getElementById("detik").innerText = Math.floor((selisih%(1000*60))/1000);
+let now=new Date().getTime();
+let s=target-now;
+h.innerText=Math.floor(s/86400000);
+j.innerText=Math.floor(s%86400000/3600000);
+m.innerText=Math.floor(s%3600000/60000);
+d.innerText=Math.floor(s%60000/1000);
 },1000);
-
-/* RSVP WA */
-function kirimWA(){
-    let nama = document.getElementById("nama").value;
-    let pesan = document.getElementById("pesan").value;
-
-    let url = "https://wa.me/628XXXXXXXXXX?text=" 
-        + "Nama: " + nama + "%0A"
-        + "Ucapan: " + pesan;
-
-    window.open(url);
-}
-
-/* ANIMASI SCROLL */
-const fades = document.querySelectorAll('.fade');
-window.addEventListener('scroll',()=>{
-    fades.forEach(el=>{
-        let top = el.getBoundingClientRect().top;
-        if(top < window.innerHeight - 100){
-            el.classList.add('show');
-        }
-    });
-});
 
 </script>
 
