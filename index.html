@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Fikri & Sindi Wedding</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
@@ -17,33 +16,46 @@ color:#f5e6c8;
 overflow:hidden;
 }
 
-/* ===== HEADER ===== */
+/* LIGHT */
+body::before{
+content:'';
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle at 30% 20%, rgba(200,169,106,0.15), transparent 40%);
+animation:light 8s infinite alternate;
+z-index:-1;
+}
+@keyframes light{
+0%{transform:translate(0,0);}
+100%{transform:translate(50px,50px);}
+}
+
+/* HEADER */
 .header{
 position:fixed;
 top:0;
 width:100%;
 display:flex;
 justify-content:center;
-gap:15px;
+gap:10px;
 padding:10px;
 background:rgba(0,0,0,0.5);
 backdrop-filter:blur(10px);
 z-index:9;
 }
-
 .header a{
 color:#c8a96a;
-text-decoration:none;
 font-size:12px;
+text-decoration:none;
 opacity:0.6;
 }
-
 .header a.active{
 opacity:1;
 border-bottom:1px solid #c8a96a;
 }
 
-/* ===== COVER ===== */
+/* COVER */
 .cover{
 position:fixed;
 width:100%;
@@ -55,99 +67,121 @@ background:#2b2118;
 z-index:10;
 }
 
-/* ===== MAIN ===== */
-.main{
-display:none;
+.envelope{
+width:300px;
+height:200px;
+background:#c8a96a;
+position:relative;
+cursor:pointer;
+border-radius:8px;
+overflow:hidden;
+}
+.flap{
+position:absolute;
+width:100%;
+height:100%;
+background:#b8975a;
+clip-path:polygon(0 0,100% 0,50% 60%);
+transition:1s;
+}
+.envelope.open .flap{
+transform:rotateX(180deg);
+}
+.card{
+position:absolute;
+width:90%;
+left:5%;
+top:20%;
+background:#1e1812;
+padding:15px;
+border-radius:10px;
+text-align:center;
+opacity:0;
+transition:1s;
+}
+.envelope.open .card{
+top:-120%;
+opacity:1;
 }
 
-/* SECTION */
-.section{
-padding:60px 20px;
-}
+/* MAIN */
+.main{display:none;}
+.section{padding:60px 20px;}
 
-/* FRAME */
 .frame{
 width:90%;
 max-width:420px;
 margin:auto;
 padding:25px;
 border:1px solid rgba(200,169,106,0.6);
-border-radius:25px;
+border-radius:20px;
 background:#1e1812;
 box-shadow:0 10px 40px rgba(0,0,0,0.6);
 text-align:center;
 }
 
-/* TEXT */
-p{margin:8px 0; font-size:14px; line-height:1.6;}
-
-/* GOLD */
 .gold{color:#c8a96a;font-family:'Playfair Display';}
 
-/* FOTO */
-img{width:100%;border-radius:15px;margin:10px 0;}
-.mempelai img{width:120px;border-radius:50%;border:2px solid #c8a96a;}
+p{margin:6px 0;font-size:14px;line-height:1.6;}
+
+img{width:100%;border-radius:10px;margin:10px 0;}
 
 /* COUNTDOWN */
 .countdown{display:flex;justify-content:center;gap:10px;}
 
 /* BUTTON */
-.btn{margin-top:10px;padding:10px 20px;border:1px solid #c8a96a;color:#c8a96a;cursor:pointer;display:inline-block;}
+.btn{
+margin-top:10px;
+padding:10px 20px;
+border:1px solid #c8a96a;
+color:#c8a96a;
+text-decoration:none;
+display:inline-block;
+}
 
 /* MUSIC */
-.music{position:fixed;bottom:20px;right:20px;background:#c8a96a;color:black;padding:12px;border-radius:50%;}
-
-/* SCROLL INDICATOR */
-.scroll-down{
+.music{
 position:fixed;
 bottom:20px;
-left:50%;
-transform:translateX(-50%);
-font-size:20px;
-animation:updown 1.5s infinite;
-}
-@keyframes updown{
-0%{transform:translate(-50%,0);}
-50%{transform:translate(-50%,10px);}
-100%{transform:translate(-50%,0);}
+right:20px;
+background:#c8a96a;
+color:black;
+padding:12px;
+border-radius:50%;
 }
 
 /* ANIMASI */
 .reveal{opacity:0;transform:translateY(30px);transition:1s;}
 .reveal.show{opacity:1;transform:translateY(0);}
-
-/* TYPING */
-.typing{border-right:2px solid gold;white-space:nowrap;overflow:hidden;}
 </style>
 </head>
 
 <body>
 
 <!-- HEADER -->
-<div class="header" id="header">
+<div class="header">
 <a href="#home">Home</a>
-<a href="#ucapan">Ucapan</a>
 <a href="#mempelai">Mempelai</a>
-<a href="#galeri">Galeri</a>
+<a href="#acara">Acara</a>
 <a href="#lokasi">Lokasi</a>
 </div>
 
 <!-- COVER -->
-<div class="cover" id="cover">
-<div class="frame">
-<h2 class="gold">Fikri & Sindi</h2>
-<p id="tamu">Ka Para Tamu Nu Dipihormat</p>
-<div class="btn" onclick="buka()">Buka Undangan</div>
+<div class="cover">
+<div class="envelope" onclick="buka(this)">
+<div class="flap"></div>
+<div class="card">
+<h3>Fikri & Sindi</h3>
+<p>Klik untuk membuka</p>
 </div>
 </div>
-
-<!-- SCROLL ICON -->
-<div class="scroll-down">⬇️</div>
+</div>
 
 <!-- MAIN -->
 <div class="main" id="main">
 
-<div class="section reveal" id="home">
+<!-- COUNTDOWN -->
+<div class="section" id="home">
 <div class="frame">
 <h3 class="gold">Ngantosan Dinten Bahagia</h3>
 <div class="countdown">
@@ -159,40 +193,79 @@ animation:updown 1.5s infinite;
 </div>
 </div>
 
-<div class="section reveal" id="ucapan">
+<!-- AYAT & HADIS -->
+<div class="section reveal">
 <div class="frame">
-<h2 class="gold typing" id="typingText"></h2>
-<p>Ku rahmat Gusti, simkuring ngahaturkeun undangan ieu.</p>
-<p>Mugia janten awal kahirupan anyar anu pinuh ku kanyaah.</p>
-</div>
-</div>
 
-<div class="section reveal" id="mempelai">
-<div class="frame mempelai">
-<img src="cowo.jpg">
-<h3 class="gold">Fikri</h3>
-<p>Putra Bapak Heri Nugraha</p>
+<p style="font-style:italic">
+"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri,
+supaya kamu merasa tenteram di sampingnya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."
+</p>
+<p style="font-size:12px;">(QS. Ar-Rum: 21)</p>
+
 <br>
-<img src="cewe.jpg">
-<h3 class="gold">Sindi</h3>
-<p>Putri Bapak Enjang Supriadi</p>
+
+<p style="font-style:italic">
+"Apabila seseorang menikah, maka ia telah menyempurnakan separuh agamanya.
+Maka hendaklah ia bertakwa kepada Allah dalam separuh yang tersisa."
+</p>
+<p style="font-size:12px;">(HR. Baihaqi)</p>
+
 </div>
 </div>
 
-<div class="section reveal" id="galeri">
+<!-- MEMPELAI -->
+<div class="section reveal" id="mempelai">
 <div class="frame">
-<h3 class="gold">Galeri</h3>
-<img src="berdua.jpg">
+
 <img src="cowo.jpg">
+<h3 class="gold">FIKRI ANUGRAH RAMADHAN</h3>
+<p>Putra Bapak Heri Nugraha</p>
+<p>Bandung, 12 Desember 1999</p>
+<p>G-Land Ciwastra Park Cendana, Desa Buah Batu, Kecamatan Bojongsoang</p>
+
+<br>
+
 <img src="cewe.jpg">
+<h3 class="gold">SINDI ROSMIATI</h3>
+<p>Putri Bapak Enjang Supriadi</p>
+<p>Bandung, 04 Agustus 2005</p>
+<p>Kp. Cianca RT 001/008 Desa Cisomang Barat, Kecamatan Cikalong Wetan</p>
+
 </div>
 </div>
 
+<!-- ACARA -->
+<div class="section reveal" id="acara">
+<div class="frame">
+<h3 class="gold">Akad Nikah</h3>
+<p>05 April 2026</p>
+<p>Bandung</p>
+<a href="https://wa.me/6282249786900?text=Konfirmasi%20kehadiran%20undangan" class="btn">
+RSVP WhatsApp
+</a>
+</div>
+</div>
+
+<!-- LOKASI -->
 <div class="section reveal" id="lokasi">
 <div class="frame">
-<h3 class="gold">Lokasi</h3>
+
+<h3 class="gold">Lokasi Akad</h3>
+
+<p>
+Akad Nikah akan dilaksanakan di kediaman mempelai wanita:
+</p>
+
+<p>
+Kp. Cianca RT 001/008  
+Desa Cisomang Barat  
+Kecamatan Cikalong Wetan
+</p>
+
 <iframe src="https://maps.google.com/maps?q=-6.9,107.6&z=15&output=embed"
-width="100%" height="250" style="border-radius:15px;border:0;"></iframe>
+width="100%" height="250" style="border:0;border-radius:10px;"></iframe>
+
 </div>
 </div>
 
@@ -203,20 +276,17 @@ width="100%" height="250" style="border-radius:15px;border:0;"></iframe>
 
 <script>
 
-/* BUKA */
-function buka(){
-document.getElementById("cover").style.display="none";
+/* OPEN */
+function buka(el){
+el.classList.add("open");
+setTimeout(()=>{
+document.querySelector(".cover").style.display="none";
 document.getElementById("main").style.display="block";
 document.body.style.overflow="auto";
 musik.play();
 window.scrollTo(0,0);
-setTimeout(typeWriter,500);
+},1200);
 }
-
-/* NAMA TAMU */
-let p=new URLSearchParams(window.location.search);
-let t=p.get("to");
-if(t){document.getElementById("tamu").innerText="Kepada "+t;}
 
 /* MUSIC */
 let musik=document.getElementById("musik");
@@ -233,39 +303,12 @@ m.innerText=Math.floor((s%3600000)/60000);
 d.innerText=Math.floor((s%60000)/1000);
 },1000);
 
-/* TYPING */
-let text="Fikri & Sindi";
-let i=0;
-function typeWriter(){
-if(i<text.length){
-typingText.innerHTML+=text.charAt(i);
-i++;
-setTimeout(typeWriter,80);
-}
-}
-
-/* REVEAL */
+/* ANIMASI */
 let reveals=document.querySelectorAll('.reveal');
 window.addEventListener('scroll',()=>{
 reveals.forEach(el=>{
 if(el.getBoundingClientRect().top<window.innerHeight-100){
 el.classList.add('show');
-}
-});
-});
-
-/* AUTO HIGHLIGHT MENU */
-let links=document.querySelectorAll('.header a');
-let sections=document.querySelectorAll('.section');
-
-window.addEventListener('scroll',()=>{
-let scrollY=window.scrollY;
-sections.forEach(sec=>{
-let top=sec.offsetTop-100;
-let height=sec.offsetHeight;
-if(scrollY>=top && scrollY<top+height){
-links.forEach(l=>l.classList.remove('active'));
-document.querySelector('.header a[href="#'+sec.id+'"]').classList.add('active');
 }
 });
 });
