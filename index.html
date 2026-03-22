@@ -8,161 +8,153 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
 
 <style>
-html { scroll-behavior:smooth; }
+html { scroll-behavior: smooth; }
 
 body {
-  margin:0;
-  font-family:'Poppins', sans-serif;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(200,169,106,0.08), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(200,169,106,0.05), transparent 40%),
-    #1e1a17;
-  color:#f5e6c8;
-  text-align:center;
-  overflow-x:hidden;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at 20% 30%, rgba(200,169,106,0.08), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(200,169,106,0.05), transparent 40%),
+              #1e1a17;
+  color: #f5e6c8;
+  text-align: center;
+  overflow-x: hidden;
 }
 
-/* ===== AMplop ===== */
+/* OPENING */
 #opening {
-  position:fixed;
-  width:100%;
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  background:rgba(0,0,0,0.7);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
 }
 
 .envelope {
-  width:280px;
-  height:180px;
-  position:relative;
+  width: 280px;
+  height: 180px;
+  position: relative;
+  perspective: 800px;
 }
 
 .cover {
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:#c8a96a;
-  border-radius:10px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:40px;
-  transition:0.6s;
-  z-index:2;
+  position: absolute;
+  inset: 0;
+  background: #c8a96a;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  transform-origin: top;
+  transition: 0.6s;
+  z-index: 2;
 }
 
 .letter {
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:#fffaf3;
-  color:#333;
-  border-radius:10px;
-  padding:15px;
-  transform:translateY(100%);
-  transition:0.6s;
+  position: absolute;
+  inset: 0;
+  background: #fffaf3;
+  color: #333;
+  border-radius: 10px;
+  padding: 15px;
+  transform: translateY(100%);
+  transition: 0.6s;
 }
 
 .envelope.open .cover {
-  transform:translateY(-100%);
+  transform: rotateX(120deg);
 }
 
 .envelope.open .letter {
-  transform:translateY(0);
+  transform: translateY(0);
 }
 
-/* HEADER */
 header {
-  background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-  url('berdua.jpg') center/cover fixed;
-  padding:120px 20px;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url('berdua.jpg') center/cover fixed;
+  padding: 120px 20px;
 }
 
-/* CARD */
 .card {
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(12px);
-  margin:20px auto;
-  max-width:500px;
-  padding:25px;
-  border-radius:20px;
-  border:1px solid rgba(200,169,106,0.3);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  margin: 20px auto;
+  max-width: 500px;
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid rgba(200,169,106,0.3);
 }
 
-/* FOTO */
 .photo {
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  border:2px solid #c8a96a;
-  object-fit:cover;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid #c8a96a;
+  object-fit: cover;
 }
 
-/* BUTTON */
 .btn {
-  display:inline-block;
-  margin-top:15px;
-  padding:10px 25px;
-  border-radius:30px;
-  background:linear-gradient(45deg,#c8a96a,#e6d3a3);
-  color:#1e1a17;
-  text-decoration:none;
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 25px;
+  border-radius: 30px;
+  background: linear-gradient(45deg,#c8a96a,#e6d3a3);
+  color: #1e1a17;
+  text-decoration: none;
 }
 
-/* GALLERY */
 .gallery {
-  display:flex;
-  overflow-x:auto;
-  gap:10px;
-  scroll-snap-type:x mandatory;
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 
 .gallery img {
-  width:80%;
-  border-radius:15px;
-  scroll-snap-align:center;
+  width: 80%;
+  border-radius: 15px;
+  scroll-snap-align: center;
 }
 
-/* FLOWER */
 .flower {
-  position:fixed;
-  top:-50px;
-  pointer-events:none;
-  opacity:0.8;
-  animation:fall linear forwards;
+  position: fixed;
+  top: -50px;
+  pointer-events: none;
+  opacity: 0.8;
+  animation: fall linear forwards;
 }
 
 @keyframes fall {
   to {
-    transform:translateY(110vh) translateX(50px) rotate(360deg);
+    transform: translateY(110vh) translateX(50px) rotate(360deg);
   }
 }
 
-/* ANIMASI */
 .fade {
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s;
 }
 
 .show {
-  opacity:1;
-  transform:translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 footer {
-  background:#1a1613;
-  padding:20px;
+  background: #1a1613;
+  padding: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- AMplop -->
+<!-- OPENING -->
 <div id="opening">
   <div class="envelope" id="envelope">
     <div class="cover">💌</div>
@@ -175,7 +167,6 @@ footer {
   </div>
 </div>
 
-<!-- AUDIO -->
 <audio id="music" loop>
   <source src="https://cdn.pixabay.com/audio/2023/03/14/audio_6f4f9c6d4b.mp3">
 </audio>
@@ -185,30 +176,27 @@ footer {
   <p>05 April 2026</p>
 </header>
 
-<!-- PENGANTIN -->
 <div class="card fade">
-  <img src="cowo.jpg" class="photo">
+  <img src="cowo.jpg" class="photo" loading="lazy">
   <h3>Fikri Anugrah Ramadhan</h3>
   <p>Putra dari Bapak Heri Nugraha</p>
 
   <p>&</p>
 
-  <img src="cewe.jpg" class="photo">
+  <img src="cewe.jpg" class="photo" loading="lazy">
   <h3>Sherliyana</h3>
   <p>Putri dari Bapak Enjang Supriadi</p>
 </div>
 
-<!-- GALERI -->
 <div class="card fade">
   <h2>Galeri</h2>
   <div class="gallery">
-    <img src="berdua.jpg">
-    <img src="cowo.jpg">
-    <img src="cewe.jpg">
+    <img src="berdua.jpg" loading="lazy">
+    <img src="cowo.jpg" loading="lazy">
+    <img src="cewe.jpg" loading="lazy">
   </div>
 </div>
 
-<!-- MAP -->
 <div class="card fade">
   <iframe src="https://maps.google.com/maps?q=Cikalong%20Wetan&output=embed"
   width="100%" height="250" style="border-radius:15px;border:none;"></iframe>
@@ -216,9 +204,8 @@ footer {
   <a class="btn" onclick="navigate()">🧭 Arahkan Saya</a>
 </div>
 
-<!-- RSVP -->
 <div class="card fade">
-  <a class="btn" href="https://wa.me/6282249786900">WhatsApp</a>
+  <a class="btn" href="https://wa.me/6282249786900?text=Saya%20akan%20hadir">Konfirmasi Hadir</a>
 </div>
 
 <footer>
@@ -226,65 +213,79 @@ footer {
 </footer>
 
 <script>
-// PARAM
-const p=new URLSearchParams(location.search);
-guest.innerText=p.get('to')||"Tamu";
-address.innerText=p.get('addr')||"";
+const p = new URLSearchParams(location.search);
+document.getElementById("guest").innerText = p.get('to') || "Bapak/Ibu/Saudara/i";
+document.getElementById("address").innerText = p.get('addr') || "Di Tempat";
 
-// OPEN
-openBtn.onclick=()=>{
- envelope.classList.add("open");
+const envelope = document.getElementById("envelope");
+const openBtn = document.getElementById("openBtn");
+const opening = document.getElementById("opening");
+const music = document.getElementById("music");
 
- setTimeout(()=>{
-  opening.style.opacity="0";
-  opening.style.pointerEvents="none";
-  setTimeout(()=>opening.remove(),600);
- },800);
+openBtn.onclick = () => {
+  envelope.classList.add("open");
 
- music.volume=0;
- music.play().catch(()=>{});
+  setTimeout(() => {
+    opening.style.opacity = "0";
+    opening.style.pointerEvents = "none";
+    setTimeout(() => opening.remove(), 600);
+  }, 800);
 
- let v=0;
- let fade=setInterval(()=>{
-  v+=0.05;
-  if(v>=0.5){music.volume=0.5;clearInterval(fade);}
-  else{music.volume=v;}
- },200);
+  music.volume = 0;
+  music.play().catch(() => {});
+
+  let v = 0;
+  const fade = setInterval(() => {
+    v += 0.05;
+    if (v >= 0.5) {
+      music.volume = 0.5;
+      clearInterval(fade);
+    } else {
+      music.volume = v;
+    }
+  }, 200);
 };
 
-// SCROLL
-const f=document.querySelectorAll('.fade');
-window.addEventListener("scroll",()=>{
- f.forEach(el=>{
-  if(el.getBoundingClientRect().top<innerHeight-50){
-   el.classList.add('show');
-  }
- });
+// fallback autoplay
+window.addEventListener("click", () => {
+  music.play().catch(() => {});
+}, { once: true });
+
+// scroll animation
+const fades = document.querySelectorAll('.fade');
+window.addEventListener("scroll", () => {
+  fades.forEach(el => {
+    if (el.getBoundingClientRect().top < innerHeight - 50) {
+      el.classList.add('show');
+    }
+  });
 });
 
-// FLOWER
-setInterval(()=>{
- let fl=document.createElement("div");
- fl.className="flower";
- fl.innerText=["❀","✿","❁"][Math.floor(Math.random()*3)];
- fl.style.left=Math.random()*100+"vw";
- fl.style.fontSize=(12+Math.random()*20)+"px";
- fl.style.animationDuration=(4+Math.random()*6)+"s";
- document.body.appendChild(fl);
- setTimeout(()=>fl.remove(),10000);
-},300);
+// flower effect
+setInterval(() => {
+  const fl = document.createElement("div");
+  fl.className = "flower";
+  fl.innerText = ["❀","✿","❁"][Math.floor(Math.random()*3)];
+  fl.style.left = Math.random()*100 + "vw";
+  fl.style.fontSize = (12 + Math.random()*20) + "px";
+  fl.style.animationDuration = (4 + Math.random()*6) + "s";
+  document.body.appendChild(fl);
+  setTimeout(() => fl.remove(), 10000);
+}, 300);
 
-// NAVIGASI
-function navigate(){
- if(navigator.geolocation){
-  navigator.geolocation.getCurrentPosition(pos=>{
-   window.open(`https://www.google.com/maps/dir/${pos.coords.latitude},${pos.coords.longitude}/-6.8,107.5`);
-  },()=>{
-   window.open("https://maps.app.goo.gl/ouS6djR2hvBFyY5R6");
-  });
- } else {
-  window.open("https://maps.app.goo.gl/ouS6djR2hvBFyY5R6");
- }
+// navigation
+function navigate() {
+  const target = "-6.858,107.471"; // ganti sesuai lokasi
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      window.open(`https://www.google.com/maps/dir/${pos.coords.latitude},${pos.coords.longitude}/${target}`);
+    }, () => {
+      window.open("https://maps.app.goo.gl/ouS6djR2hvBFyY5R6");
+    });
+  } else {
+    window.open("https://maps.app.goo.gl/ouS6djR2hvBFyY5R6");
+  }
 }
 </script>
 
