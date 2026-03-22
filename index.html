@@ -16,7 +16,7 @@ color:#f5e6c8;
 overflow:hidden;
 }
 
-/* LIGHT */
+/* LIGHT GOLD */
 body::before{
 content:'';
 position:fixed;
@@ -67,6 +67,7 @@ background:#2b2118;
 z-index:10;
 }
 
+/* ENVELOPE */
 .envelope{
 width:300px;
 height:200px;
@@ -75,32 +76,41 @@ position:relative;
 cursor:pointer;
 border-radius:8px;
 overflow:hidden;
+perspective:1000px;
 }
+
 .flap{
 position:absolute;
 width:100%;
 height:100%;
 background:#b8975a;
 clip-path:polygon(0 0,100% 0,50% 60%);
+transform-origin:top;
 transition:1s;
 }
-.envelope.open .flap{
-transform:rotateX(180deg);
-}
+
+/* CARD */
 .card{
 position:absolute;
 width:90%;
 left:5%;
-top:20%;
+top:30%;
 background:#1e1812;
 padding:15px;
 border-radius:10px;
 text-align:center;
+transform:translateY(100%);
 opacity:0;
 transition:1s;
 }
+
+/* ANIMASI */
+.envelope.open .flap{
+transform:rotateX(180deg);
+}
+
 .envelope.open .card{
-top:-120%;
+transform:translateY(-140%);
 opacity:1;
 }
 
@@ -150,7 +160,7 @@ padding:12px;
 border-radius:50%;
 }
 
-/* ANIMASI */
+/* REVEAL */
 .reveal{opacity:0;transform:translateY(30px);transition:1s;}
 .reveal.show{opacity:1;transform:translateY(0);}
 </style>
@@ -166,14 +176,17 @@ border-radius:50%;
 <a href="#lokasi">Lokasi</a>
 </div>
 
-<!-- COVER -->
+<!-- COVER AMPLOP -->
 <div class="cover">
 <div class="envelope" onclick="buka(this)">
 <div class="flap"></div>
+
 <div class="card">
+<p style="font-size:13px;">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
 <h3>Fikri & Sindi</h3>
-<p>Klik untuk membuka</p>
+<p>Klik pikeun muka undangan</p>
 </div>
+
 </div>
 </div>
 
@@ -193,24 +206,46 @@ border-radius:50%;
 </div>
 </div>
 
-<!-- AYAT & HADIS -->
+<!-- KARTU UCAPAN -->
 <div class="section reveal">
 <div class="frame">
 
+<p style="font-size:13px;">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+
+<p>Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+
+<p>
+Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan:
+</p>
+
+<h3 class="gold">
+FIKRI ANUGRAH RAMADHAN  
+<br>&  
+<br>SINDI ROSMIATI
+</h3>
+
+<p>
+Minggu, 05 April 2026  
+<br>
+Di kediaman mempelai wanita
+</p>
+
+<p>
+Merupakan kehormatan bagi kami apabila Bapak/Ibu berkenan hadir dan memberikan doa restu.
+</p>
+
+<p>Wassalamu’alaikum Warahmatullahi Wabarakatuh</p>
+
+</div>
+</div>
+
+<!-- AYAT -->
+<div class="section reveal">
+<div class="frame">
 <p style="font-style:italic">
-"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri,
-supaya kamu merasa tenteram di sampingnya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."
+"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan..."
 </p>
 <p style="font-size:12px;">(QS. Ar-Rum: 21)</p>
-
-<br>
-
-<p style="font-style:italic">
-"Apabila seseorang menikah, maka ia telah menyempurnakan separuh agamanya.
-Maka hendaklah ia bertakwa kepada Allah dalam separuh yang tersisa."
-</p>
-<p style="font-size:12px;">(HR. Baihaqi)</p>
-
 </div>
 </div>
 
@@ -221,16 +256,10 @@ Maka hendaklah ia bertakwa kepada Allah dalam separuh yang tersisa."
 <img src="cowo.jpg">
 <h3 class="gold">FIKRI ANUGRAH RAMADHAN</h3>
 <p>Putra Bapak Heri Nugraha</p>
-<p>Bandung, 12 Desember 1999</p>
-<p>G-Land Ciwastra Park Cendana, Desa Buah Batu, Kecamatan Bojongsoang</p>
-
-<br>
 
 <img src="cewe.jpg">
 <h3 class="gold">SINDI ROSMIATI</h3>
 <p>Putri Bapak Enjang Supriadi</p>
-<p>Bandung, 04 Agustus 2005</p>
-<p>Kp. Cianca RT 001/008 Desa Cisomang Barat, Kecamatan Cikalong Wetan</p>
 
 </div>
 </div>
@@ -240,8 +269,7 @@ Maka hendaklah ia bertakwa kepada Allah dalam separuh yang tersisa."
 <div class="frame">
 <h3 class="gold">Akad Nikah</h3>
 <p>05 April 2026</p>
-<p>Bandung</p>
-<a href="https://wa.me/6282249786900?text=Konfirmasi%20kehadiran%20undangan" class="btn">
+<a href="https://wa.me/6282249786900?text=Saya%20akan%20hadir" class="btn">
 RSVP WhatsApp
 </a>
 </div>
@@ -254,17 +282,13 @@ RSVP WhatsApp
 <h3 class="gold">Lokasi Akad</h3>
 
 <p>
-Akad Nikah akan dilaksanakan di kediaman mempelai wanita:
-</p>
-
-<p>
 Kp. Cianca RT 001/008  
 Desa Cisomang Barat  
 Kecamatan Cikalong Wetan
 </p>
 
 <iframe src="https://maps.google.com/maps?q=-6.9,107.6&z=15&output=embed"
-width="100%" height="250" style="border:0;border-radius:10px;"></iframe>
+width="100%" height="250" style="border-radius:10px;border:0;"></iframe>
 
 </div>
 </div>
@@ -276,16 +300,17 @@ width="100%" height="250" style="border:0;border-radius:10px;"></iframe>
 
 <script>
 
-/* OPEN */
+/* OPEN AMPLOP + KARTU KELUAR */
 function buka(el){
 el.classList.add("open");
+
 setTimeout(()=>{
 document.querySelector(".cover").style.display="none";
 document.getElementById("main").style.display="block";
 document.body.style.overflow="auto";
 musik.play();
 window.scrollTo(0,0);
-},1200);
+},1500);
 }
 
 /* MUSIC */
@@ -303,7 +328,7 @@ m.innerText=Math.floor((s%3600000)/60000);
 d.innerText=Math.floor((s%60000)/1000);
 },1000);
 
-/* ANIMASI */
+/* REVEAL */
 let reveals=document.querySelectorAll('.reveal');
 window.addEventListener('scroll',()=>{
 reveals.forEach(el=>{
