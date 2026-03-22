@@ -3,172 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Wedding Invitation</title>
+<title>Undangan Pernikahan</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    background: #0c0c0c;
-    color: #fff;
+    margin:0;
     font-family: 'Montserrat', sans-serif;
-    scroll-behavior: smooth;
+    background:#0b0b0b;
+    color:white;
+    scroll-behavior:smooth;
 }
 
-/* GOLD STYLE */
-.gold {
-    color: #d4af37;
-}
+/* GOLD */
+.gold { color:#d4af37; }
 
 /* COVER */
 .cover {
-    height: 100vh;
-    background: linear-gradient(180deg,#000,#1a1a1a);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 2s ease;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(#000,#1a1a1a);
 }
-
-.cover h1 {
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 4px;
-    color: #d4af37;
-}
-
 .cover a {
-    margin-top: 30px;
-    padding: 12px 30px;
-    border: 1px solid #d4af37;
-    color: #d4af37;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.cover a:hover {
-    background: #d4af37;
-    color: black;
+    margin-top:20px;
+    padding:12px 25px;
+    border:1px solid gold;
+    color:gold;
+    text-decoration:none;
 }
 
 /* SECTION */
-section {
-    padding: 80px 20px;
-    text-align: center;
-    animation: fadeUp 1.5s ease;
-}
+section { padding:80px 20px; text-align:center; }
 
-/* HERO */
-.hero h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    color: #d4af37;
-}
+/* FOTO */
+img { max-width:100%; }
 
 /* MEMPELAI */
 .mempelai {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
 }
-
 .card {
-    background: #111;
-    padding: 20px;
-    border-radius: 20px;
-    border: 1px solid #222;
-    width: 200px;
-    transition: 0.3s;
+    width:260px;
+    background:#111;
+    padding:20px;
+    border-radius:20px;
 }
-
-.card:hover {
-    transform: translateY(-10px);
-    border-color: #d4af37;
-}
-
 .card img {
-    width: 100%;
-    border-radius: 50%;
-    border: 3px solid #d4af37;
+    width:140px;
+    border-radius:50%;
+    border:3px solid gold;
 }
 
-/* ACARA */
-.acara {
-    background: #111;
+/* COUNTDOWN */
+.countdown {
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    font-size:20px;
 }
 
-.box {
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #d4af37;
-    width: 250px;
+/* BUTTON */
+button {
+    padding:10px 20px;
+    background:gold;
+    border:none;
 }
 
-/* GALERI */
-.gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+/* MUSIC BTN */
+.music-btn {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:gold;
+    color:black;
+    padding:10px;
+    border-radius:50%;
+    cursor:pointer;
 }
 
-.gallery img {
-    width: 150px;
-    margin: 10px;
-    border-radius: 10px;
-    transition: 0.3s;
+/* ANIMASI */
+.fade {
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s;
 }
-
-.gallery img:hover {
-    transform: scale(1.1);
-}
-
-/* RSVP */
-.rsvp input, .rsvp textarea {
-    width: 80%;
-    padding: 10px;
-    margin: 10px;
-    background: transparent;
-    border: 1px solid #d4af37;
-    color: white;
-}
-
-.rsvp button {
-    padding: 10px 25px;
-    border: none;
-    background: #d4af37;
-    color: black;
-}
-
-/* FOOTER */
-.footer {
-    padding: 40px;
-    font-size: 14px;
-    color: #aaa;
-}
-
-/* ANIMATION */
-@keyframes fadeIn {
-    from {opacity:0;}
-    to {opacity:1;}
-}
-
-@keyframes fadeUp {
-    from {
-        opacity:0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity:1;
-        transform: translateY(0);
-    }
+.fade.show {
+    opacity:1;
+    transform:translateY(0);
 }
 </style>
 </head>
@@ -177,71 +105,130 @@ section {
 
 <!-- COVER -->
 <section class="cover">
-    <h1>WEDDING INVITATION</h1>
-    <p class="gold">Fikri & Pasangan</p>
-    <a href="#home">Buka Undangan</a>
+    <h1 class="gold">WEDDING INVITATION</h1>
+    <h2 id="tamu">Kepada Tamu</h2>
+    <a href="#home" onclick="playMusic()">Buka Undangan</a>
 </section>
 
 <!-- HERO -->
-<section id="home" class="hero">
-    <h2>Fikri & Pasangan</h2>
-    <p>12 Desember 2026</p>
+<section id="home" class="fade">
+    <h2 class="gold">Fikri & Sindi</h2>
+    <p>05 April 2026</p>
+    <img src="berdua.jpg" style="width:250px;border-radius:20px;">
+</section>
+
+<!-- COUNTDOWN -->
+<section class="fade">
+    <h2 class="gold">Menuju Hari Bahagia</h2>
+    <div class="countdown">
+        <div><span id="hari"></span><br>Hari</div>
+        <div><span id="jam"></span><br>Jam</div>
+        <div><span id="menit"></span><br>Menit</div>
+        <div><span id="detik"></span><br>Detik</div>
+    </div>
 </section>
 
 <!-- MEMPELAI -->
-<section class="mempelai">
-    <div class="card">
-        <img src="https://via.placeholder.com/200">
-        <h3 class="gold">Fikri</h3>
-        <p>Putra dari Bpk...</p>
-    </div>
+<section class="mempelai fade">
 
-    <div class="card">
-        <img src="https://via.placeholder.com/200">
-        <h3 class="gold">Pasangan</h3>
-        <p>Putri dari Ibu...</p>
-    </div>
+<div class="card">
+<img src="cowo.jpg">
+<h3 class="gold">Fikri Anugrah Ramadhan</h3>
+<p>
+Putra dari Bapak Heri Nugraha<br><br>
+Bandung, 12 Desember 1999<br><br>
+G-Land Ciwastra Park Cendana,<br>
+Bojongsoang
+</p>
+</div>
+
+<div class="card">
+<img src="cewe.jpg">
+<h3 class="gold">Sindi Rosmiati</h3>
+<p>
+Putri dari Bapak Enjang Supriadi<br><br>
+Bandung, 04 Agustus 2005<br><br>
+KP Cianca RT 001/008,<br>
+Cikalong Wetan
+</p>
+</div>
+
 </section>
 
 <!-- ACARA -->
-<section class="acara">
-    <h2 class="gold">Save The Date</h2>
-
-    <div class="box">
-        <h3>Akad</h3>
-        <p>10.00 WIB</p>
-        <p>Bandung</p>
-    </div>
-
-    <div class="box">
-        <h3>Resepsi</h3>
-        <p>13.00 WIB</p>
-    </div>
-</section>
-
-<!-- GALERI -->
-<section>
-    <h2 class="gold">Gallery</h2>
-    <div class="gallery">
-        <img src="https://via.placeholder.com/150">
-        <img src="https://via.placeholder.com/150">
-        <img src="https://via.placeholder.com/150">
-    </div>
+<section class="fade">
+<h2 class="gold">Akad Nikah</h2>
+<p>05 April 2026</p>
+<a href="https://maps.app.goo.gl/6fNTUMAbQiqNRJ566" target="_blank" class="gold">
+Lihat Lokasi
+</a>
 </section>
 
 <!-- RSVP -->
-<section class="rsvp">
-    <h2 class="gold">Ucapan & Doa</h2>
-    <input type="text" placeholder="Nama">
-    <textarea placeholder="Tulis ucapan..."></textarea>
-    <br>
-    <button>Kirim</button>
+<section class="fade">
+<h2 class="gold">Kirim Ucapan</h2>
+<input id="nama" placeholder="Nama"><br><br>
+<textarea id="pesan" placeholder="Ucapan"></textarea><br><br>
+<button onclick="kirimWA()">Kirim via WhatsApp</button>
 </section>
 
-<!-- FOOTER -->
-<div class="footer">
-    © 2026 Wedding Invitation
-</div>
+<!-- MUSIC -->
+<audio id="musik" src="musik.mp3"></audio>
+<div class="music-btn" onclick="toggleMusic()">🎵</div>
+
+<script>
+
+/* NAMA TAMU */
+const url = new URLSearchParams(window.location.search);
+const namaTamu = url.get('to');
+if(namaTamu){
+    document.getElementById("tamu").innerText = "Kepada " + namaTamu;
+}
+
+/* MUSIC */
+let musik = document.getElementById("musik");
+function playMusic(){ musik.play(); }
+function toggleMusic(){
+    if(musik.paused){ musik.play(); }
+    else{ musik.pause(); }
+}
+
+/* COUNTDOWN */
+let target = new Date("April 5, 2026 00:00:00").getTime();
+setInterval(()=>{
+    let now = new Date().getTime();
+    let selisih = target - now;
+
+    document.getElementById("hari").innerText = Math.floor(selisih/(1000*60*60*24));
+    document.getElementById("jam").innerText = Math.floor((selisih%(1000*60*60*24))/(1000*60*60));
+    document.getElementById("menit").innerText = Math.floor((selisih%(1000*60*60))/(1000*60));
+    document.getElementById("detik").innerText = Math.floor((selisih%(1000*60))/1000);
+},1000);
+
+/* RSVP WA */
+function kirimWA(){
+    let nama = document.getElementById("nama").value;
+    let pesan = document.getElementById("pesan").value;
+
+    let url = "https://wa.me/628XXXXXXXXXX?text=" 
+        + "Nama: " + nama + "%0A"
+        + "Ucapan: " + pesan;
+
+    window.open(url);
+}
+
+/* ANIMASI SCROLL */
+const fades = document.querySelectorAll('.fade');
+window.addEventListener('scroll',()=>{
+    fades.forEach(el=>{
+        let top = el.getBoundingClientRect().top;
+        if(top < window.innerHeight - 100){
+            el.classList.add('show');
+        }
+    });
+});
+
+</script>
 
 </body>
 </html>
