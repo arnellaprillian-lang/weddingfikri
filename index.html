@@ -28,6 +28,12 @@ body {
   justify-content:center;
   align-items:center;
   z-index:10;
+  transition:opacity 0.6s ease;
+  padding:20px;
+}
+
+#opening h3 {
+  margin:5px 0;
 }
 
 #opening button {
@@ -38,6 +44,7 @@ body {
   background:#c8a96a;
   color:white;
   font-size:16px;
+  cursor:pointer;
 }
 
 /* HEADER */
@@ -45,6 +52,7 @@ header {
   background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
   url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc');
   background-size:cover;
+  background-position:center;
   color:white;
   padding:120px 20px;
 }
@@ -85,7 +93,7 @@ h1 {
   margin-top:10px;
 }
 
-/* FADE ANIMATION */
+/* ANIMATION */
 .fade {
   opacity:0;
   transform:translateY(20px);
@@ -96,6 +104,12 @@ h1 {
   opacity:1;
   transform:translateY(0);
 }
+
+footer {
+  background:#2f2f2f;
+  color:white;
+  padding:20px;
+}
 </style>
 </head>
 
@@ -105,7 +119,8 @@ h1 {
 <div id="opening">
   <h2>Kepada Yth:</h2>
   <h3 id="guest">Tamu Undangan</h3>
-  <button onclick="openInvite()">Buka Undangan</button>
+  <p id="address"></p>
+  <button id="openBtn">Buka Undangan</button>
 </div>
 
 <!-- MUSIC -->
@@ -131,7 +146,7 @@ h1 {
     <h2>Detail Acara</h2>
     <p>Akad: 08.00 WIB</p>
     <p>Resepsi: 10.00 WIB</p>
-    <a class="btn" href="https://maps.google.com">Lokasi</a>
+    <a class="btn" href="https://maps.google.com" target="_blank">Lokasi</a>
   </div>
 </div>
 
@@ -142,30 +157,61 @@ h1 {
   </div>
 </div>
 
-<footer class="section">
+<footer>
   <p>Hatur nuhun 🙏</p>
 </footer>
 
 <script>
-// NAMA TAMU
-const urlParams = new URLSearchParams(window.location.search);
-const nama = urlParams.get('to');
-if(nama){
-  document.getElementById("guest").innerText = nama;
+// =====================
+// AMBIL DATA URL
+// =====================
+const params = new URLSearchParams(window.location.search);
+const name = params.get('to');
+const addr = params.get('addr');
+
+if (name) {
+  document.getElementById("guest").innerText = name;
+}
+if (addr) {
+  document.getElementById("address").innerText = addr;
 }
 
-// OPEN INVITE
-function openInvite(){
-  document.getElementById("opening").style.display="none";
-  document.getElementById("music").play();
-}
+// =====================
+// OPEN INVITE (ANTI BUG)
+// =====================
+let opened = false;
+const btn = document.getElementById("openBtn");
 
+btn.addEventListener("click", () => {
+  if (opened) return;
+  opened = true;
+
+  btn.disabled = true;
+  btn.innerText = "Membuka...";
+
+  const opening = document.getElementById("opening");
+  opening.style.opacity = "0";
+
+  setTimeout(() => {
+    opening.style.display = "none";
+  }, 600);
+
+  document.getElementById("music").play().catch(()=>{});
+});
+
+// =====================
 // COUNTDOWN
-const targetDate = new Date("Dec 22, 2026 08:00:00").getTime();
+// =====================
+const target = new Date("Dec 22, 2026 08:00:00").getTime();
 
-setInterval(()=>{
+setInterval(() => {
   const now = new Date().getTime();
-  const gap = targetDate - now;
+  const gap = target - now;
+
+  if (gap <= 0) {
+    document.getElementById("countdown").innerHTML = "Acara Dimulai 🎉";
+    return;
+  }
 
   const d = Math.floor(gap / (1000*60*60*24));
   const h = Math.floor((gap % (1000*60*60*24))/(1000*60*60));
@@ -173,19 +219,25 @@ setInterval(()=>{
   const s = Math.floor((gap % (1000*60))/1000);
 
   document.getElementById("countdown").innerHTML =
-    d+" Hari "+h+" Jam "+m+" Menit "+s+" Detik";
-},1000);
+    `${d} Hari ${h} Jam ${m} Menit ${s} Detik`;
+}, 1000);
 
+// =====================
 // SCROLL ANIMATION
-const fades = document.querySelectorAll('.fade');
-window.addEventListener('scroll', ()=>{
-  fades.forEach(el=>{
+// =====================
+const faders = document.querySelectorAll(".fade");
+
+const showOnScroll = () => {
+  faders.forEach(el => {
     const top = el.getBoundingClientRect().top;
-    if(top < window.innerHeight - 50){
-      el.classList.add('show');
+    if (top < window.innerHeight - 50) {
+      el.classList.add("show");
     }
   });
-});
+};
+
+window.addEventListener("scroll", showOnScroll);
+window.addEventListener("load", showOnScroll);
 </script>
 
 </body>
