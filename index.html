@@ -91,10 +91,18 @@ body {
   cursor: pointer;
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(230, 200, 120, 0.3);
   transition: transform 0.3s;
+  animation: gentlePulse 1.8s infinite ease-in-out;
+}
+
+@keyframes gentlePulse {
+  0% { transform: scale(1); box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(230, 200, 120, 0.3); }
+  50% { transform: scale(1.02); box-shadow: 0 25px 40px rgba(0, 0, 0, 0.6), 0 0 0 4px rgba(230, 200, 120, 0.6); }
+  100% { transform: scale(1); box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(230, 200, 120, 0.3); }
 }
 
 .envelope-card:active {
   transform: scale(0.97);
+  animation: none;
 }
 
 .envelope-flap {
@@ -135,6 +143,33 @@ body {
 .inner-message h4 {
   color: #e7c582;
   letter-spacing: 1px;
+}
+
+/* instruksi klik - tambahan baru */
+.click-instruction {
+  display: inline-block;
+  margin-top: 12px;
+  background: rgba(200, 169, 106, 0.2);
+  padding: 6px 14px;
+  border-radius: 40px;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #e7c582;
+  border: 1px solid #c8a96a;
+  backdrop-filter: blur(2px);
+  letter-spacing: 1px;
+}
+
+.click-instruction i {
+  display: inline-block;
+  animation: tapHint 1s infinite;
+}
+
+@keyframes tapHint {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(4px); }
+  100% { transform: translateY(0px); }
 }
 
 .envelope-card.open .envelope-flap {
@@ -366,7 +401,7 @@ h2 {
   transform: translateY(0);
 }
 
-/* map iframe */
+/* map frame */
 .map-frame {
   width: 100%;
   height: 220px;
@@ -412,7 +447,12 @@ h2 {
     <div class="inner-message">
       <p>بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
       <h4>Fikri & Sindi</h4>
-      <p style="font-size:12px; margin-top:8px;">✨ Undangan Pernikahan ✨<br>Klik untuk membuka</p>
+      <p style="font-size:12px; margin-top:8px;">✨ Undangan Pernikahan ✨</p>
+      <!-- INSTRUKSI KLIK YANG JELAS -->
+      <div class="click-instruction">
+        👆 <i>Klik di sini</i> 👆<br>
+        <span style="font-size:10px;">tekan amplop untuk membuka</span>
+      </div>
     </div>
   </div>
 </div>
@@ -456,12 +496,12 @@ h2 {
         <img src="cowo.jpg" alt="Fikri" class="photo-round" onclick="openLightbox(this.src)">
         <div style="text-align:center">
           <h3 class="gold-text">Fikri Anugrah Ramadhan</h3>
-          <p>Putra Bapak Arman & Ibu Nurhayati</p>
+          <p>Putra Bapak Heri Nugraha & Ibu Nurhayati</p>
         </div>
         <img src="cewe.jpg" alt="Sindi" class="photo-round" onclick="openLightbox(this.src)">
         <div style="text-align:center">
           <h3 class="gold-text">Sindi Rosmiati</h3>
-          <p>Putri Bapak Suryana & Ibu Elis Herawati</p>
+          <p>Putri Bapak Enjang Supriadi & Ibu Elis Herawati</p>
         </div>
       </div>
     </div>
@@ -476,7 +516,6 @@ h2 {
         <img src="cowo.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="Pengantin Pria">
         <img src="cewe.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="Pengantin Wanita">
         <img src="berdua.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="Pasangan 2">
-        <!-- tambahan agar grid terlihat lebih meriah -->
         <img src="cowo.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="potrait">
         <img src="cewe.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="potrait wanita">
       </div>
@@ -524,7 +563,7 @@ h2 {
   const musicBtn = document.getElementById('musicToggleBtn');
   
   let isMusicPlaying = false;
-  let audioUnlocked = false;
+  let opened = false;
   
   // fungsi smooth play musik (fade in)
   function fadeInMusic() {
@@ -566,7 +605,6 @@ h2 {
   }
   
   // Buka amplop dan unlock audio sekaligus
-  let opened = false;
   function openEnvelope() {
     if(opened) return;
     opened = true;
@@ -584,13 +622,11 @@ h2 {
   
   envelopeDiv.addEventListener('click', openEnvelope);
   
-  // Jika user langsung klik icon musik sebelum buka amplop? tetap izinkan buka amplop dulu, tapi kita handle juga di musik supaya tidak error
+  // musik button handle
   musicBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (!opened) {
-      // Jika amplop belum dibuka, buka amplop dulu lalu main musik
-      if(!opened) openEnvelope();
-      else toggleMusic();
+      openEnvelope();
     } else {
       toggleMusic();
     }
@@ -626,7 +662,7 @@ h2 {
   
   function activateNavOnScroll() {
     let scrollPos = window.scrollY + 150;
-    sections.forEach((section, idx) => {
+    sections.forEach((section) => {
       const top = section.offsetTop;
       const bottom = top + section.offsetHeight;
       if (scrollPos >= top && scrollPos < bottom) {
@@ -634,18 +670,12 @@ h2 {
         navLinks.forEach(link => {
           link.classList.remove('active');
           const href = link.getAttribute('href').substring(1);
-          if (href === targetId || (!targetId && idx === 0 && href === 'home')) {
+          if (href === targetId || (targetId === 'home' && href === 'home')) {
             link.classList.add('active');
           }
-          // fallback untuk home
-          if (targetId === 'home' && href === 'home') link.classList.add('active');
-          if (targetId === 'couple' && href === 'couple') link.classList.add('active');
-          if (targetId === 'gallery' && href === 'gallery') link.classList.add('active');
-          if (targetId === 'location' && href === 'location') link.classList.add('active');
         });
       }
     });
-    // Jika scroll diatas home
     if (window.scrollY < 100) {
       navLinks.forEach(link => link.classList.remove('active'));
       if(navLinks[0]) navLinks[0].classList.add('active');
@@ -663,8 +693,6 @@ h2 {
   window.addEventListener('scroll', activateNavOnScroll);
   window.addEventListener('load', () => {
     activateNavOnScroll();
-    // jika user tidak membuka amplop dalam 2 detik, tetap bisa interaksi, tapi ga force. 
-    // set fallback agar audio tetap bisa diputar jika klik tombol musik
   });
   
   // LIGHTBOX FUNCTION
@@ -683,7 +711,7 @@ h2 {
   window.openLightbox = openLightbox;
   window.closeLightbox = closeLightbox;
   
-  // Pastikan ketika tombol navigasi smooth
+  // smooth scroll nav
   document.querySelectorAll('.nav-link').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
@@ -697,7 +725,7 @@ h2 {
     });
   });
   
-  // fallback jika gambar tidak ada, gunakan placeholder data agar tidak error
+  // fallback image jika error
   const allImgs = document.querySelectorAll('img');
   allImgs.forEach(img => {
     img.addEventListener('error', function() {
@@ -707,23 +735,16 @@ h2 {
     });
   });
   
-  // inisialisasi untuk jika sudah terbuka tanpa refresh
-  if(localStorage.getItem('weddingOpened')) {
-    // jika sudah pernah dibuka di sesi ini? tidak perlu simpan permanen, tapi biarkan user enjoy.
-  }
-  // pastikan main tidak terlihat sebelum buka
+  // main hidden sebelum buka
   mainContainer.style.display = 'none';
   document.body.style.overflow = 'hidden';
-  // jika ada interaksi global untuk unlock audio
+  
+  // handle audio context untuk mobile
   document.body.addEventListener('touchstart', function unlockAudioOnce() {
     if (!opened && audioEl.paused) {
-      // tidak memaksa, hanya agar audio context siap
       audioEl.load();
     }
   }, { once: true });
-  
-  // untuk memastikan teks dan tampilan cantik, semua gambar menggunakan alt
-  console.log("Undangan Digital Fikri & Sindi - Siap dibagikan");
 </script>
 </body>
 </html>
